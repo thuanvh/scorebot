@@ -1,0 +1,1 @@
+wget https://huggingface.co/uonlp/Vistral-7B-Chat-gguf/resolve/main/ggml-vistral-7B-chat-q4_0.gguf?download=true -O ggml-vistral-7B-chat-q4_0.gguf
