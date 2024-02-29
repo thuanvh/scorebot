@@ -1,7 +1,6 @@
 text,action
-"Tỉ số  trận đấu giữa Manchester với Arsenal là bao nhiêu?",score_specific
 "Xin chào",hello
-"Đặt cược như thế  nào",help_bet
+"Đặt cược như thế nào",help_bet
 "Xin chào bạn!",hello
 "Rất vui được gặp bạn.",hello
 "Cám ơn bạn đã chú ý đến mình.",hello
@@ -11,3 +10,14 @@ text,action
 "Rất vui được giới thiệu bản thân với bạn.",hello
 "Hãy trao đổi chuyện thú vị với tôi.",hello
 "Cảm ơn bạn đã dành thời gian của mình cho tôi.",hello
+"Tỉ số trận đấu giữa Manchester với Arsenal là bao nhiêu?",score_specific
+"Tỉ số chung cuộc trận đấu giữa Manchester với Arsenal là bao nhiêu?",score_specific
+"Tỉ số trận đấu giữa Manchester với Arsenal mấy không?",score_specific
+"Trận bóng giữa Manchester với Arsenal có kết quả chưa?",score_specific
+"Kết quả trận Manchester United và Liverpool",score_specific
+"Kết quả trận Real Madrid và Liverpool",score_specific
+"Trận Manchester United và Barcelona kết quả thế nào",score_specific
+"Kết quả ra sao trận Paris Saint-Germain và Juventus",score_specific
+"Tỉ số trận Borussia Dortmund và Arsenal",score_specific
+"Trận Manchester United và Bayern Munich thế nào rồi",score_specific
+"Kết quả trận Manchester City và Liverpool ra sao ",score_specific
