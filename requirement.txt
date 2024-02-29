@@ -1,3 +1,5 @@
 llama-cpp-python
 langchain_community
 pandas
+fastapi
+uvicorn
