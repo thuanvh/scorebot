@@ -52,10 +52,19 @@ def chat(item: Item):
     #print(max_index, scores[max_index])
 
     #print(df['text'][max_index],df['action'][max_index])
-    reply = score_specific(item.message)
+    action = df['action'][max_index]
+    print(action)
+    if action == 'score_specific':
+        reply = score_specific(item.message)
+    elif action == 'hello':
+        reply = hello(item.message)
+    elif action == 'help_bet':
+        reply = help_bet(item.message)
+    elif action == 'help_score':
+        reply = help_score(item.message)
     return {"message": item.message, "similar_text":df['text'][max_index],"similarity":scores[max_index], "action": df['action'][max_index], "reply":reply}
 
-def score_specific(message : str):
+def call_lmstudio(message:str, system:str):
     # Example: reuse your existing OpenAI setup
     from openai import OpenAI
 
@@ -65,7 +74,7 @@ def score_specific(message : str):
     completion = client.chat.completions.create(
     model="local-model", # this field is currently unused
     messages=[
-        {"role": "system", "content": "Hãy tổng hợp thông tin về tên hai đội bóng đá từ người dùng và chỉ trả lời dạng json ```json {""team1"":  Tên đội bóng đá 1, ""team2"": Tên đội bóng đá 2}. Hãy để trống tên đội bóng nếu không có thông tin"},
+        {"role": "system", "content": system},
         {"role": "user", "content": message}
     ],
     temperature=0.7,
@@ -73,3 +82,52 @@ def score_specific(message : str):
 
     print(completion.choices[0].message)
     return completion.choices[0].message
+
+def help_score(message : str):
+    content = "Bạn cung cấp thông tin tỉ số trận đấu. Người dùng cần cung cấp tên hai đội bóng."
+    return call_lmstudio(message, content)
+
+def help_bet(message : str):
+    content = "Bạn cung cấp thông tin đặt cược trận đấu. Người dùng cần cung cấp tên hai đội bóng."
+    return call_lmstudio(message, content)
+
+def score_specific(message : str):
+    content = "Hãy tổng hợp thông tin về tên hai đội bóng đá từ người dùng và chỉ trả lời dạng json ```json {""team1"":  Tên đội bóng đá 1, ""team2"": Tên đội bóng đá 2}. Hãy để trống tên đội bóng nếu không có thông tin"
+    return call_lmstudio(message, content)
+    # # Example: reuse your existing OpenAI setup
+    # from openai import OpenAI
+
+    # # Point to the local server
+    # client = OpenAI(base_url="http://192.168.111.1:1234/v1", api_key="not-needed")
+
+    # completion = client.chat.completions.create(
+    # model="local-model", # this field is currently unused
+    # messages=[
+    #     {"role": "system", "content": "Hãy tổng hợp thông tin về tên hai đội bóng đá từ người dùng và chỉ trả lời dạng json ```json {""team1"":  Tên đội bóng đá 1, ""team2"": Tên đội bóng đá 2}. Hãy để trống tên đội bóng nếu không có thông tin"},
+    #     {"role": "user", "content": message}
+    # ],
+    # temperature=0.7,
+    # )
+
+    # print(completion.choices[0].message)
+    # return completion.choices[0].message
+
+def hello(message: str):
+    content = "Bạn là trợ lý ảo hữu dụng. Bạn cung cấp các thông tin tỉ số các trận đấu. Hãy chào hỏi mọi người và nói về chức năng của bạn."
+    return call_lmstudio(message, content)
+    # from openai import OpenAI
+
+    # # Point to the local server
+    # client = OpenAI(base_url="http://192.168.111.1:1234/v1", api_key="not-needed")
+
+    # completion = client.chat.completions.create(
+    # model="local-model", # this field is currently unused
+    # messages=[
+    #     {"role": "system", "content": "Bạn là trợ lý ảo hữu dụng. Bạn cung cấp các thông tin tỉ số các trận đấu. Hãy chào hỏi mọi người và nói về chức năng của bạn."},
+    #     {"role": "user", "content": message}
+    # ],
+    # temperature=0.7,
+    # )
+
+    # print(completion.choices[0].message)
+    # return completion.choices[0].message
