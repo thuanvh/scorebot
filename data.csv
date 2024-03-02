@@ -1,23 +1,23 @@
-text,action
-"Xin chào",hello
-"Đặt cược như thế nào",help_bet
-"Xin chào bạn!",hello
-"Rất vui được gặp bạn.",hello
-"Cám ơn bạn đã chú ý đến mình.",hello
-"Bạn có muốn chia sẻ chuyện gì với tôi không?",hello
-"Hãy cho tôi biết cách để giúp bạn có thêm niềm vui.",hello
-"Chúc bạn một ngày tốt đẹp.",hello
-"Rất vui được giới thiệu bản thân với bạn.",hello
-"Hãy trao đổi chuyện thú vị với tôi.",hello
-"Cảm ơn bạn đã dành thời gian của mình cho tôi.",hello
-"Tỉ số trận đấu giữa Manchester với Arsenal là bao nhiêu?",score_specific
-"Tỉ số chung cuộc trận đấu giữa Manchester với Arsenal là bao nhiêu?",score_specific
-"Tỉ số trận đấu giữa Manchester với Arsenal mấy không?",score_specific
-"Trận bóng giữa Manchester với Arsenal có kết quả chưa?",score_specific
-"Kết quả trận Manchester United và Liverpool",score_specific
-"Kết quả trận Real Madrid và Liverpool",score_specific
-"Trận Manchester United và Barcelona kết quả thế nào",score_specific
-"Kết quả ra sao trận Paris Saint-Germain và Juventus",score_specific
-"Tỉ số trận Borussia Dortmund và Arsenal",score_specific
-"Trận Manchester United và Bayern Munich thế nào rồi",score_specific
-"Kết quả trận Manchester City và Liverpool ra sao ",score_specific
+id,text,action
+1,"Xin chào",hello
+2,"Đặt cược như thế nào",help_bet
+3,"Xin chào bạn!",hello
+4,"Rất vui được gặp bạn.",hello
+5,"Cám ơn bạn đã chú ý đến mình.",hello
+6,"Bạn có muốn chia sẻ chuyện gì với tôi không?",hello
+7,"Hãy cho tôi biết cách để giúp bạn có thêm niềm vui.",hello
+8,"Chúc bạn một ngày tốt đẹp.",hello
+9,"Rất vui được giới thiệu bản thân với bạn.",hello
+10,"Hãy trao đổi chuyện thú vị với tôi.",hello
+11,"Cảm ơn bạn đã dành thời gian của mình cho tôi.",hello
+12,"Tỉ số trận đấu giữa Manchester với Arsenal là bao nhiêu?",score_specific
+13,"Tỉ số chung cuộc trận đấu giữa Manchester với Arsenal là bao nhiêu?",score_specific
+14,"Tỉ số trận đấu giữa Manchester với Arsenal mấy không?",score_specific
+15,"Trận bóng giữa Manchester với Arsenal có kết quả chưa?",score_specific
+16,"Kết quả trận Manchester United và Liverpool",score_specific
+17,"Kết quả trận Real Madrid và Liverpool",score_specific
+18,"Trận Manchester United và Barcelona kết quả thế nào",score_specific
+19,"Kết quả ra sao trận Paris Saint-Germain và Juventus",score_specific
+20,"Tỉ số trận Borussia Dortmund và Arsenal",score_specific
+21,"Trận Manchester United và Bayern Munich thế nào rồi",score_specific
+22,"Kết quả trận Manchester City và Liverpool ra sao ",score_specific
