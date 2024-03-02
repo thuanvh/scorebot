@@ -1,4 +1,4 @@
-id,text,action
+id,text,label
 1,"Xin chào",hello
 2,"Đặt cược như thế nào",help_bet
 3,"Xin chào bạn!",hello

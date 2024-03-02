@@ -1,1 +1,2 @@
 wget https://huggingface.co/uonlp/Vistral-7B-Chat-gguf/resolve/main/ggml-vistral-7B-chat-q4_0.gguf?download=true -O ggml-vistral-7B-chat-q4_0.gguf
+wget https://huggingface.co/lmstudio-ai/gemma-2b-it-GGUF/resolve/main/gemma-2b-it-q4_k_m.gguf -O gemma-2b-it-q4_k_m.gguf
