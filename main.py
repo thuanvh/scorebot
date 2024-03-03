@@ -7,24 +7,18 @@ from langchain_community.embeddings import LlamaCppEmbeddings
 import pandas as pd
 import numpy as np
 
+from dbqdrant import DbQdrant
+
 
 class Item(BaseModel):
     message: str
 
 app = FastAPI()
 
-
-
-# Data for reference
-df = pd.read_csv("data.csv")
-print(df)
-
 llama = LlamaCppEmbeddings(model_path="ggml-vistral-7B-chat-q4_0.gguf")
 
-with open('output.npy','rb') as f:
-    doc_data = np.load(f)
 
-
+db = DbQdrant(llama)
 
 
 @app.get("/")
@@ -34,26 +28,12 @@ def read_root():
 
 @app.post("/chat")
 def chat(item: Item):
-    # query = "Xin chào"
-    # query = "Tỉ số trận Manchester và Nottingham"
-    query = item.message
-    query_embed = llama.embed_query(query)
-    print(query_embed)
-
-    #scores = (doc_db[:] @ query_embed[:].T) * 100
-    #print(scores.tolist())
-
-    #a=np.array(doc_db)
-    b = np.array(query_embed)
-
-    scores = doc_data[:] @ b[:].T
-    #print(scores)
-    max_index = np.argmax(scores)
-    #print(max_index, scores[max_index])
-
-    #print(df['text'][max_index],df['action'][max_index])
-    action = df['action'][max_index]
-    print(action)
+    res = db.search(item.message)
+    print(res[0])
+    print(res[0].id)
+    print(res[0].score)
+    print(res[0].payload)
+    action = res[0].payload['label']
     if action == 'score_specific':
         reply = score_specific(item.message)
     elif action == 'hello':
@@ -62,7 +42,9 @@ def chat(item: Item):
         reply = help_bet(item.message)
     elif action == 'help_score':
         reply = help_score(item.message)
-    return {"message": item.message, "similar_text":df['text'][max_index],"similarity":scores[max_index], "action": df['action'][max_index], "reply":reply}
+    return {"message": item.message, "similar_text":res[0].payload['text'],
+            "similarity":res[0].score,
+            "label": action, "reply":reply}
 
 def call_lmstudio(message:str, system:str):
     # Example: reuse your existing OpenAI setup
