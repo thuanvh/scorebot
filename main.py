@@ -74,6 +74,15 @@ def help_bet(message : str):
     return call_lmstudio(message, content)
 
 def score_specific(message : str):
+    ###
+    #     curl http://localhost:11434/api/chat -d '{
+    #   "model": "gemma:2b",
+    #   "messages": [
+    #     { "role": "system", "content": "Hãy tổng hợp thông tin về tên hai đội và chỉ trả lời dạng json ```json {\"team1\":  Tên đội 1, \"team2\": Tên đội 2}. Hãy để trống nếu không có thông tin" },
+    #     { "role": "user", "content": "Kết quả trận đấu giữa Manchester City và Liverpool?" }
+    #   ]
+    # }'
+
     content = "Hãy tổng hợp thông tin về tên hai đội bóng đá từ người dùng và chỉ trả lời dạng json ```json {""team1"":  Tên đội bóng đá 1, ""team2"": Tên đội bóng đá 2}. Hãy để trống tên đội bóng nếu không có thông tin"
     return call_lmstudio(message, content)
     # # Example: reuse your existing OpenAI setup
