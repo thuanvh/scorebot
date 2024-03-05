@@ -3,11 +3,11 @@ import llama_cpp.llama_tokenizer
 import gradio as gr
 
 llama = llama_cpp.Llama.from_pretrained(
-    repo_id="sail/Sailor-4B-Chat-gguf",
-    filename="ggml-model-Q3_K_L.gguf",
-    tokenizer=llama_cpp.llama_tokenizer.LlamaHFTokenizer.from_pretrained("sail/Sailor-4B-Chat"),
-    n_gpu_layers=40,
-    n_threads=8,
+    repo_id="sail/Sailor-0.5B-Chat-gguf",
+    filename="ggml-model-Q4_K_M.gguf",
+    tokenizer=llama_cpp.llama_tokenizer.LlamaHFTokenizer.from_pretrained("sail/Sailor-0.5B-Chat"),
+    n_gpu_layers=0,
+    n_threads=4,
     verbose=False,
 )
 

@@ -7,3 +7,5 @@ openai
 qdrant_client
 ollama
 gradio
+transformers
+torch
