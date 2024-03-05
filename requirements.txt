@@ -6,3 +6,4 @@ uvicorn
 openai
 qdrant_client
 ollama
+gradio
