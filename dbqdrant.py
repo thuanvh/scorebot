@@ -21,7 +21,8 @@ class DbQdrant:
         self.model = modelmap[model_name]
         #llama = LlamaCppEmbeddings(model_path=model["file"])
 
-        self.collection_name="score_collection"
+        self.collection_name="command"
+        self.team_name="team"
 
 
         # Initialize the client
@@ -29,22 +30,26 @@ class DbQdrant:
         self.client = QdrantClient(path=self.model["db"])
         self.llm = llm
 
-    def generate_db(self):
+    def generate_all_db(self):
+        self.generate_db("data.csv", self.collection_name)
+        self.generate_db("data.team", self.team_name)
+        
+    def generate_db(self, file, collection_name):
         if not os.path.exists(self.model["file"]):
             
-            df = pd.read_csv("data.csv")
+            df = pd.read_csv(file)
             print(df)
             doc_result = self.llm.embed_documents(df["text"])
             print(doc_result)
             print(len(doc_result),len(doc_result[0]))
 
             self.client.recreate_collection(
-                collection_name=self.collection_name,
+                collection_name=collection_name,
                 vectors_config=VectorParams(size=self.model['size'], distance=Distance.COSINE),
             )
             # Use the new add method
             self.client.upsert(
-                collection_name="score_collection",
+                collection_name=collection_name,
                 points=[
                     PointStruct(
                         id=int(df['id'][idx]),
@@ -65,3 +70,8 @@ class DbQdrant:
         )
         print(search_result)
         return search_result
+
+if __name__ == '__main__':
+    llama = LlamaCppEmbeddings(model_path="ggml-vistral-7B-chat-q4_0.gguf")
+    db = DbQdrant(llama)
+    db.generate_all_db()
