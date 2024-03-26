@@ -32,38 +32,49 @@ class DbQdrant:
 
     def generate_all_db(self):
         self.generate_db("data.csv", self.collection_name)
-        self.generate_db("data.team", self.team_name)
+        self.generate_db("team.csv", self.team_name)
         
     def generate_db(self, file, collection_name):
-        if not os.path.exists(self.model["file"]):
-            
-            df = pd.read_csv(file)
-            print(df)
-            doc_result = self.llm.embed_documents(df["text"])
-            print(doc_result)
-            print(len(doc_result),len(doc_result[0]))
+        #if not os.path.exists(self.model["file"]):
+        
+        df = pd.read_csv(file)
+        print(df)
+        doc_result = self.llm.embed_documents(df["text"])
+        print(doc_result)
+        print(len(doc_result),len(doc_result[0]))
 
-            self.client.recreate_collection(
-                collection_name=collection_name,
-                vectors_config=VectorParams(size=self.model['size'], distance=Distance.COSINE),
-            )
-            # Use the new add method
-            self.client.upsert(
-                collection_name=collection_name,
-                points=[
-                    PointStruct(
-                        id=int(df['id'][idx]),
-                        vector=vector,
-                        payload={"text": df["text"][idx], "label": df["label"][idx]}
-                    )
-                    for idx, vector in enumerate(doc_result)
-                ]
-            )
+        self.client.recreate_collection(
+            collection_name=collection_name,
+            vectors_config=VectorParams(size=self.model['size'], distance=Distance.COSINE),
+        )
+        # Use the new add method
+        self.client.upsert(
+            collection_name=collection_name,
+            points=[
+                PointStruct(
+                    id=int(df['id'][idx]),
+                    vector=vector,
+                    payload={"text": df["text"][idx], "label": df["label"][idx]}
+                )
+                for idx, vector in enumerate(doc_result)
+            ]
+        )
 
     def search(self,query_text, count=1):
         query_vector = self.llm.embed_query(query_text)
         search_result = self.client.search(
             collection_name=self.collection_name,
+            query_vector=query_vector,
+            limit=count,
+            with_payload=True
+        )
+        print(search_result)
+        return search_result
+    
+    def search_topic(self,query_text,collection_name, count=1):
+        query_vector = self.llm.embed_query(query_text)
+        search_result = self.client.search(
+            collection_name=collection_name,
             query_vector=query_vector,
             limit=count,
             with_payload=True

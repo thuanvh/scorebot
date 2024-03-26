@@ -9,3 +9,4 @@ ollama
 gradio
 transformers
 torch
+# pygemma

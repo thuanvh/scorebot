@@ -8,7 +8,7 @@ class ClientDbQdrant:
         _db = db
 
     def chat(self, message, system):
-        res = self._db.search(message,2)
+        res = self._db.search_topic(message,self._db.team_name,2)
         print(res[0])
         print(res[0].id)
         print(res[0].score)
