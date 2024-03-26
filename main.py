@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 from dbqdrant import DbQdrant
-
+from clientQdrant import ClientDbQdrant
 
 class Item(BaseModel):
     message: str
@@ -81,6 +81,10 @@ def help_bet(message : str):
     content = "Bạn cung cấp thông tin đặt cược trận đấu. Người dùng cần cung cấp tên hai đội bóng."
     return call_llm(message, content)
 
+def get_team(message : str):
+    client = ClientDbQdrant(db)
+    return client.chat(message)
+
 def score_specific(message : str):
     ###
     #     curl http://localhost:11434/api/chat -d '{
@@ -90,9 +94,13 @@ def score_specific(message : str):
     #     { "role": "user", "content": "Kết quả trận đấu giữa Manchester City và Liverpool?" }
     #   ]
     # }'
-
-    content = "Hãy tổng hợp thông tin về tên hai đội và chỉ trả lời dạng ```json {""team1"":  Tên đội 1, ""team2"": Tên đội 2}. Hãy để trống nếu không có thông tin"
-    return call_llm(message, content)
+    useGemma = False
+    if useGemma :
+        content = "Hãy tổng hợp thông tin về tên hai đội và chỉ trả lời dạng ```json {""team1"":  Tên đội 1, ""team2"": Tên đội 2}. Hãy để trống nếu không có thông tin"
+        return call_llm(message, content)
+    else:
+        return get_team(message)
+    
     # # Example: reuse your existing OpenAI setup
     # from openai import OpenAI
 
